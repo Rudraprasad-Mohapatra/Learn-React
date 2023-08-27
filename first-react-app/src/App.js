@@ -5,6 +5,8 @@ function App() {
   return (
     <div className="App">
       Namaste Biswa!
+      <span id="name">Name</span>
+      <button id="btn">submit</button>
     </div>
   );
 }
