@@ -1,7 +1,8 @@
-export default function Image(props) {
+export default function Image({ src="logo192.png"}) {
     return (
         <>
             <h1>I am DoggyDon.</h1>
-            <img src={props.src} alt="Doggy Don"></img>
+            <img src={src} alt="Doggy Don"></img>
         </>)
 }
+
