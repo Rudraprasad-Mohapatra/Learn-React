@@ -1,7 +1,8 @@
 import { useState } from 'react';
+
 let z = 0;
 function Counter() {
-    const [x, setX] = useState(0);
+        const [x, setX] = useState(0);
     const [y, setY] = useState(0);
     return (
         <>
