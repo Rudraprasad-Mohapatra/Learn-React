@@ -5,8 +5,24 @@ function App() {
   let [counter, setCounter] = useState(15);
   
   const addValue = () => {
-    setCounter(counter+1 >= 20 ? 20 : counter+1);
+    // setCounter(counter+1 >= 20 ? 20 : counter+1);
+    // setCounter(counter +1); //15 -> 16
+
+    /*
+    // But if we want direct 15 to 19 then this way will not work
     // setCounter(counter +1);
+    // setCounter(counter +1);
+    // setCounter(counter +1);
+    // setCounter(counter +1);
+    */
+
+    // But if we want direct 15 to 19 then this way will work perfectly fine
+    // But from here direct 15 to 19
+    // React Interview
+    setCounter(prevCounter => prevCounter + 1);
+    setCounter(prevCounter => prevCounter + 1);
+    setCounter(prevCounter => prevCounter + 1);
+    setCounter(prevCounter => prevCounter + 1);
     console.log("Value added",counter);
   }
   const removeValue = () => {
