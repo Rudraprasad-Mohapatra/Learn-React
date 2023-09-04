@@ -1,0 +1,24 @@
+.pokemon {
+    flex-basis: 20%;
+    height: 200px;
+    width: 300px;
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 20px;
+    margin-top: 2rem;
+}
+
+.pokemon:hover{
+    background-color: aliceblue;
+}
+.pokemon-image {
+    height: 150px;
+    max-height: 80%;
+}
+
+.pokemon-name{
+    font-size:larger;
+    letter-spacing: 0.5rem;
+}
