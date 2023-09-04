@@ -47,7 +47,7 @@ export default function PokemonList() {
     return (
         <div className="pokemon-list-wrapper">
             <div className="pokemonWrapper">
-                {(isLoading) ? "Loading..." : pokemonList.map((p) => <Pokemon name={p.name} image={p.image} key={p.id}></Pokemon>
+                {(isLoading) ? "Loading..." : pokemonList.map((p) => <Pokemon name={p.name} image={p.image} key={p.id} id={p.id}></Pokemon>
                 )
                 }
             </div>
