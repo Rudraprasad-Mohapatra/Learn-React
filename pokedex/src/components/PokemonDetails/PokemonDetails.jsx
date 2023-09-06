@@ -8,7 +8,7 @@ export default function PokemonDetails() {
     const { id } = useParams();
     const [pokemon, setPokemon] = useState({});
 
-    // console.log(id);
+
     async function downloadPokemon() {
         const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
         setPokemon({
@@ -20,14 +20,12 @@ export default function PokemonDetails() {
         })
     }
 
-    const {pokemonListState, setPokemonListState} = usePokemonList("https://pokeapi.co/api/v2/type/fire", true);
+    const { pokemonListState, setPokemonListState } = usePokemonList(`https://pokeapi.co/api/v2/type/${pokemon.types ? pokemon.types[0] : "fire"}`, true);
+    console.log("Pokemon", pokemon.types ? pokemon.types[0] : "fire");
 
     useEffect(() => {
         downloadPokemon();
-        console.log(pokemonListState);
-        // setPokemonListState((state)=>{
-        //     ...state,
-        // })
+        console.log("list", pokemonListState);
     }, []);
     return (
         <div className="pokemon-details-wrapper">
@@ -46,14 +44,14 @@ export default function PokemonDetails() {
                 {pokemon.types && pokemon.types.map((t) => <div key={t}>{t}</div>)}
             </div>
 
-            <div>
-                More fire typr pokemons
+            {pokemon.types && <div>
+                More {pokemon.types[0]} type pokemons
                 <ul>
                     {
-                        pokemonListState.pokemonList && pokemonListState.pokemonList.map((p)=><li key={p.pokemon.name}>{p.pokemon.name}</li>)
+                        pokemonListState.pokemonList && pokemonListState.pokemonList.map((p) => <li key={p.pokemon.url}>{p.pokemon.name}</li>)
                     }
                 </ul>
-            </div>
+            </div>}
         </div>
     )
 }

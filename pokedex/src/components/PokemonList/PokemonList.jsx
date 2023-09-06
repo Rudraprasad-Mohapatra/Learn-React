@@ -3,12 +3,6 @@ import Pokemon from "../Pokemon/Pokemon.jsx"
 import usePokemonList from "../../hooks/usePokemonList";
 export default function PokemonList() {
 
-    // const [pokemonList, setPokemonList] = useState([]);
-    // const [isLoading, setIsLoading] = useState(true);
-    // const [PokedexUrl, setPokedexUrl] = useState("https://pokeapi.co/api/v2/pokemon/");
-
-    // const [nextUrl, setNextUrl] = useState("");
-    // const [prevUrl, setPrevUrl] = useState("");
     const { pokemonListState, setPokemonListState } = usePokemonList("https://pokeapi.co/api/v2/pokemon/", false);
 
     return (
@@ -19,8 +13,8 @@ export default function PokemonList() {
                 }
             </div>
             <div className="controls">
-                <button disabled={pokemonListState.prevUrl == null} onClick={() => setPokemonListState({  ...pokemonListState, PokedexUrl: pokemonListState.prevUrl })}>Prev</button>
-                <button disabled={pokemonListState.nextUrl == null} onClick={() => setPokemonListState({ ...pokemonListState, PokedexUrl: pokemonListState.nextUrl })} style={{cursor: "pointer"}}>Next</button>
+                <button disabled={pokemonListState.prevUrl == null} onClick={() => setPokemonListState({ ...pokemonListState, PokedexUrl: pokemonListState.prevUrl })}>Prev</button>
+                <button disabled={pokemonListState.nextUrl == null} onClick={() => setPokemonListState({ ...pokemonListState, PokedexUrl: pokemonListState.nextUrl })} style={{ cursor: "pointer" }}>Next</button>
             </div>
         </div>
     )

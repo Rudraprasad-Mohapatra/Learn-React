@@ -11,19 +11,16 @@ function usePokemonList(url, type) {
     });
 
     const downloadPokemons = async () => {
-        // setIsLoading(true);
         setPokemonListState((State) => ({ ...State, isLoading: true }))
 
         const response = await axios.get(pokemonListState.PokedexUrl);
 
         const pokemonResults = response.data.results;
-        console.log("List is :")
-        setPokemonListState((state) => ({
-            ...state,
-            pokemonList: response.data.pokemon.slice(0,5)
-        }))
-        // setNextUrl(response.data.next);
-        // setPrevUrl(response.data.previous);
+
+        console.log("Response is :", response.data.pokemon);
+        
+        console.log(pokemonListState);
+
         setPokemonListState((State) => ({
             ...State,
             nextUrl: response.data.next,
@@ -31,7 +28,10 @@ function usePokemonList(url, type) {
         }))
 
         if (type) {
-            console.log("typerequested!")
+            setPokemonListState((state)=>({
+                ...state,
+                pokemonList : response.data.pokemon.slice(0,5) 
+            }))
         } else {
             const pokemonResultPromise = pokemonResults.map((pokemon) => axios.get(pokemon.url));
             const pokemonData = await axios.all(pokemonResultPromise);
@@ -46,9 +46,6 @@ function usePokemonList(url, type) {
                 }
             });
 
-            // console.log(res);
-            // setPokemonList(res);
-            // setIsLoading(false);
             setPokemonListState((State) => ({
                 ...State,
                 pokemonList: res,

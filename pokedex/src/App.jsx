@@ -5,8 +5,8 @@ function App() {
 
   return (
     <div className="outerPokedex">
-    <Link to="/">
-      <h1 id="pokedex-heading">Pokedex</h1>
+      <Link to="/">
+        <h1 id="pokedex-heading">Pokedex</h1>
       </Link>
       <CustomRoutes />
     </div>
