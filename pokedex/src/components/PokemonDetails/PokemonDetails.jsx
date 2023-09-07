@@ -1,32 +1,11 @@
 import { useParams } from "react-router-dom";
-import axios from "axios";
-import { useState, useEffect } from "react";
 import "./PokemonDetails.css"
-import usePokemonList from "../../hooks/usePokemonList";
+import usePokemonDetails from "../../hooks/usePokemonDetails";
 
 export default function PokemonDetails() {
     const { id } = useParams();
-    const [pokemon, setPokemon] = useState({});
-
-
-    async function downloadPokemon() {
-        const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
-        setPokemon({
-            name: response.data.name,
-            image: response.data.sprites.other.dream_world.front_default,
-            weight: response.data.weight,
-            height: response.data.height,
-            types: response.data.types.map((t) => t.type.name)
-        })
-    }
-
-    const { pokemonListState, setPokemonListState } = usePokemonList(`https://pokeapi.co/api/v2/type/${pokemon.types ? pokemon.types[0] : "fire"}`, true);
-    console.log("Pokemon", pokemon.types ? pokemon.types[0] : "fire");
-
-    useEffect(() => {
-        downloadPokemon();
-        console.log("list", pokemonListState);
-    }, []);
+    const { pokemon, pokemonListState } = usePokemonDetails(id);
+    console.log("Pokemon in details jsx is ", pokemon);
     return (
         <div className="pokemon-details-wrapper">
             <div className="pokemon-details-name">
@@ -44,7 +23,7 @@ export default function PokemonDetails() {
                 {pokemon.types && pokemon.types.map((t) => <div key={t}>{t}</div>)}
             </div>
 
-            {pokemon.types && <div>
+            {pokemon.types && pokemonListState.pokemonList && <div>
                 More {pokemon.types[0]} type pokemons
                 <ul>
                     {

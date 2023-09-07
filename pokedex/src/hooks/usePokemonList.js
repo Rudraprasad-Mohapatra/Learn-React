@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-function usePokemonList(url, type) {
+function usePokemonList(type) {
     const [pokemonListState, setPokemonListState] = useState({
         pokemonList: [],
         isLoading: true,
-        PokedexUrl: url,
+        PokedexUrl: "https://pokeapi.co/api/v2/pokemon",
         nextUrl: "",
         prevUrl: ""
     });
@@ -17,9 +17,7 @@ function usePokemonList(url, type) {
 
         const pokemonResults = response.data.results;
 
-        console.log("Response is :", response.data.pokemon);
-        
-        console.log(pokemonListState);
+        console.log("Response is :", response);
 
         setPokemonListState((State) => ({
             ...State,
@@ -28,14 +26,14 @@ function usePokemonList(url, type) {
         }))
 
         if (type) {
-            setPokemonListState((state)=>({
-                ...state,
-                pokemonList : response.data.pokemon.slice(0,5) 
-            }))
+            // setPokemonListState((State) => ({
+            //     ...State,
+            //     pokemonList: response.data.pokemon.slice(0, 5)
+            // }))
         } else {
             const pokemonResultPromise = pokemonResults.map((pokemon) => axios.get(pokemon.url));
             const pokemonData = await axios.all(pokemonResultPromise);
-            // console.log(pokemonData);
+            // console.log("Pokemon Data is ",pokemonData);
             const res = pokemonData.map((pokeData) => {
                 const pokemon = pokeData.data;
                 return {
@@ -45,6 +43,7 @@ function usePokemonList(url, type) {
                     id: pokemon.id
                 }
             });
+            console.log("res is ", res);
 
             setPokemonListState((State) => ({
                 ...State,
@@ -53,10 +52,12 @@ function usePokemonList(url, type) {
             }))
         }
     }
+
     useEffect(() => {
         downloadPokemons();
     }, [pokemonListState.PokedexUrl]);
 
+    console.log(pokemonListState);
     return {
         pokemonListState,
         setPokemonListState
