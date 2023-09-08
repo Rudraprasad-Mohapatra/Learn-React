@@ -4,8 +4,9 @@ import usePokemonDetails from "../../hooks/usePokemonDetails";
 
 export default function PokemonDetails() {
     const { id } = useParams();
-    const { pokemon, pokemonListState } = usePokemonDetails(id);
-    console.log("Pokemon in details jsx is ", pokemon);
+    const { pokemon } = usePokemonDetails(id);
+    console.log("I am pokemon", pokemon);
+    // console.log("I am pokemonListState", pokemonListState);
     return (
         <div className="pokemon-details-wrapper">
             <div className="pokemon-details-name">
@@ -23,11 +24,11 @@ export default function PokemonDetails() {
                 {pokemon.types && pokemon.types.map((t) => <div key={t}>{t}</div>)}
             </div>
 
-            {pokemon.types && pokemonListState.pokemonList && <div>
+            {pokemon.types && pokemon.similarPokemons && <div>
                 More {pokemon.types[0]} type pokemons
                 <ul>
                     {
-                        pokemonListState.pokemonList && pokemonListState.pokemonList.map((p) => <li key={p.pokemon.url}>{p.pokemon.name}</li>)
+                        pokemon.similarPokemons.map((p) => <li key={p.pokemon.url}>{p.pokemon.name}</li>)
                     }
                 </ul>
             </div>}

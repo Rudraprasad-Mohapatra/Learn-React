@@ -1,36 +1,39 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-function usePokemonList(type) {
+function usePokemonList() {
     const [pokemonListState, setPokemonListState] = useState({
         pokemonList: [],
         isLoading: true,
         PokedexUrl: "https://pokeapi.co/api/v2/pokemon",
         nextUrl: "",
-        prevUrl: ""
+        prevUrl: "",
+        // type: ""
     });
 
     const downloadPokemons = async () => {
-        setPokemonListState((State) => ({ ...State, isLoading: true }))
 
-        const response = await axios.get(pokemonListState.PokedexUrl);
+        // if (pokemonListState.type) {
+        //     console.log("type is ", pokemonListState.type);
+        //     const response = await axios.get(`https://pokeapi.co/api/v2/type/${pokemonListState.type}`);
+        //     setPokemonListState((State) => ({
+        //         ...State,
+        //         pokemonList: response.data.pokemon ? response.data.pokemon.slice(0, 5) : ["none"]
+        //     }))
+        // } else {
+            setPokemonListState((State) => ({ ...State, isLoading: true }))
+            console.log("URL is", pokemonListState.PokedexUrl);
+            const response = await axios.get(pokemonListState.PokedexUrl);
 
-        const pokemonResults = response.data.results;
+            const pokemonResults = response.data.results;
 
-        console.log("Response is :", response);
+            console.log("Response is :", response.data.pokemon);
 
-        setPokemonListState((State) => ({
-            ...State,
-            nextUrl: response.data.next,
-            prevUrl: response.data.previous
-        }))
-
-        if (type) {
-            // setPokemonListState((State) => ({
-            //     ...State,
-            //     pokemonList: response.data.pokemon.slice(0, 5)
-            // }))
-        } else {
+            setPokemonListState((State) => ({
+                ...State,
+                nextUrl: response.data.next,
+                prevUrl: response.data.previous
+            }))
             const pokemonResultPromise = pokemonResults.map((pokemon) => axios.get(pokemon.url));
             const pokemonData = await axios.all(pokemonResultPromise);
             // console.log("Pokemon Data is ",pokemonData);
@@ -51,7 +54,7 @@ function usePokemonList(type) {
                 isLoading: false
             }))
         }
-    }
+    // }
 
     useEffect(() => {
         downloadPokemons();
