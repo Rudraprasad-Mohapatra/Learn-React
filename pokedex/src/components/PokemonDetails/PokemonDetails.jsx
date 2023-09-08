@@ -14,10 +14,10 @@ export default function PokemonDetails() {
             </div>
             <img className="pokemon-details-name pokemon-details-image"
                 src={pokemon.image} />
-            <div className="pokemon-details-name pokemon-details-weight">
+            <div className="pokemon-details-name">
                 weight: {pokemon.weight}
             </div>
-            <div className="pokemon-details-name pokemon-details-height">
+            <div className="pokemon-details-name">
                 height: {pokemon.height}
             </div>
             <div className="pokemon-details-name pokemon-details-types">
