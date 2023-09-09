@@ -2,24 +2,27 @@ import { useParams } from "react-router-dom";
 import "./PokemonDetails.css"
 import usePokemonDetails from "../../hooks/usePokemonDetails";
 
-export default function PokemonDetails() {
+export default function PokemonDetails({ pokemonName }) {
     const { id } = useParams();
-    const { pokemon } = usePokemonDetails(id);
-    console.log("I am pokemon", pokemon);
+    const { pokemon, isLoading } = usePokemonDetails(id, pokemonName);
+    // console.log("I am pokemon", pokemon);
     // console.log("I am pokemonListState", pokemonListState);
     return (
         <div className="pokemon-details-wrapper">
+
+            {isLoading && <div id="loader" className="hidden">Loading...</div>}
+
             <div className="pokemon-details-name">
                 <span>{pokemon.name}</span>
             </div>
             <img className="pokemon-details-name pokemon-details-image"
                 src={pokemon.image} />
-            <div className="pokemon-details-name">
+            {!isLoading &&<div className="pokemon-details-name">
                 weight: {pokemon.weight}
-            </div>
-            <div className="pokemon-details-name">
+            </div>}
+            {!isLoading &&<div className="pokemon-details-name">
                 height: {pokemon.height}
-            </div>
+            </div>}
             <div className="pokemon-details-name pokemon-details-types">
                 {pokemon.types && pokemon.types.map((t) => <div key={t}>{t}</div>)}
             </div>

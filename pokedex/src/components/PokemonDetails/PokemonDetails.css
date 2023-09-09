@@ -27,7 +27,12 @@
     padding: 1rem;
     background-color: gainsboro;
 }
-.pokemon-details-image{
+
+.pokemon-details-image {
     max-height: 200px;
-    margin-top:2rem;
+    margin-top: 2rem;
 }
+
+/* .hidden {
+    display: none;
+} */
