@@ -1,4 +1,4 @@
-:root{
+:root {
     /* --yellow: #ffc107; */
 }
 
@@ -8,5 +8,17 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
+    color: aliceblue;
 }
 
+button {
+    margin: 1rem;
+    padding: 0.7rem;
+    border-radius: 20px;
+}
+
+input {
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 50px;
+}
