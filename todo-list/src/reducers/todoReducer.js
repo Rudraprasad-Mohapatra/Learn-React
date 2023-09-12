@@ -27,7 +27,7 @@ export default function todoReducer(state, action) {
             return t;
         });
         return updatedList;
-    }else{
+    } else {
         return state;
     }
 }
