@@ -16,11 +16,11 @@ export default function Todo({ todoData, isFinished, id, changeFinished, onDelet
                     changeFinished(e.target.checked);
                 }}
             />
-            {(isEditing) ? <input type="text" onChange={(e)=>{setEditText(e.target.value)}} value={editText} /> : todoData}
+            {(isEditing) ? <input type="text" onChange={(e) => { setEditText(e.target.value) }} value={editText} /> : todoData}
             <button onClick={() => {
                 setIsEditing(!isEditing);
                 onEdit(editText);
-            }}>{ !isEditing ? "Edit" : "Save"}</button>
+            }}>{!isEditing ? "Edit" : "Save"}</button>
             <button onClick={onDelete}>Delete</button>
         </div>
     )
