@@ -1,18 +1,18 @@
 import Todo from "../Todo/Todo"
 import { useSelector } from "react-redux";
-export default function TodoList({todoFinished, deleteTodo, editTodo}) {
-    const list = useSelector((state) => state.todo);
+export default function TodoList({ todoFinished, deleteTodo, editTodo }) {
+    const list = useSelector((state) => state.todo.todoList);
 
     function onFinished(todo, isFinished) {
-        todoFinished(todo, isFinished);
+        todoFinished({ todo, isFinished });
     }
 
     function onDelete(todo) {
-        deleteTodo(todo);
+        deleteTodo({ todo });
     }
 
     function onEdit(todo, todoText) {
-        editTodo(todo, todoText);
+        editTodo({ todo, todoText });
     }
     console.log(list);
     return (
